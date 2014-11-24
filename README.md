@@ -1,6 +1,7 @@
 ## Simple Android SQLite
 
-This Android library help to manage database creation,version,query and others in a very simple way. This provide developers with a simple way to define the database based on classes. Rather than implementing the onCreate() and onUpgrade() methods to execute a bunch of SQL statements, developers simply define the schema code-first. 
+Simple Sqlite library help you to manage database creation, version, query and others very simple. This provide developers with a simple way to define the databases based on classes. 
+Rather than implementing the onCreate() and onUpgrade() methods to execute a bunch of SQL statements, developers simply define the schema code-first. 
 
 It is implemented as an extension to SQLiteOpenHelper, and map sql queries to objects classes.
 
@@ -65,10 +66,10 @@ Supported types:
 Configure you database with SQLiteConfiguration. This configuration needs to be doing in the application class. So, define your application class and configure your database:
 
 Configuration:
-	* Database name
-	* Version
-	* Tables
-	* Extensions (Extensions are the way to add behavior to SQLiteOpenHelper across onCreate() and onUpgrade() )
+	+ Database name
+	+ Version
+	+ Tables
+	+ Extensions (Extensions are the way to add behavior to SQLiteOpenHelper across onCreate() and onUpgrade() )
 
 ```java
 public class MainApplication extends Application {
@@ -80,6 +81,7 @@ public class MainApplication extends Application {
                 .setDatabaseName("my_database.db")
                 .setDatabaseVersion(0)
                 .registerTable(Person.class)
+                .registerTable(OtherModel.class)
                 .build();
         SQLiteManager.setConfiguration(configuration);
 
@@ -110,26 +112,6 @@ Add to AndroidManifest.xml
     }
     ...
 ```
-### beginTransaction()
-
-### endTransaction()
-
-### delete()
-
-```java
- 	mSQLiteManager.delete(Person.class,id);
- 	//or
- 	Person p;
- 	mSQLiteManager.delete(p);
-```
-
-### update()
-
-```java
-	Person p;
-	p.name = "Alex"
-	mSQLiteManager.update(p);
-```
 
 ### get()
 
@@ -152,13 +134,37 @@ Add to AndroidManifest.xml
 	 mSQLiteManager.insert(p);
 ```
 
+### beginTransaction() and endTransaction()
+
+```java
+ 	mSQLiteManager.beginTransaction();
+ 	//Code here
+ 	mSQLiteManager.endTransaction();
+```
+
+### delete()
+
+```java
+ 	mSQLiteManager.delete(Person.class,id);
+ 	//or
+ 	Person p;
+ 	mSQLiteManager.delete(p);
+```
+
+### update()
+
+```java
+	Person p;
+	p.name = "Alex"
+	mSQLiteManager.update(p);
+```
 
 
 ## Issues
 
 Have a bug? Please create an issue here on GitHub!
 
-https://github.com/*/issues
+https://github.com/AlejandroDominguez/simple-sqlite/issues
 
 ## Versioning
 
@@ -178,7 +184,7 @@ For more information on semantic versioning, please visit http://semver.org/.
 
 **Alejandro Dominguez**
 
-+ http://github.com/
++ https://github.com/AlejandroDominguez
 
 ## License
 
